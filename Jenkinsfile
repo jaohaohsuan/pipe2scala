@@ -39,7 +39,7 @@ podTemplate(label: 'pipe2scala', containers: [
                     def containerId = sh(returnStdout: true, script: "docker run -d ${imageSha}")
                     sleep 10
                     sh "docker logs ${containerId}"
-                    sh "docker rm -f -v ${imageSha}"
+                    sh "docker rm -f -v ${containerId}"
                 }
             }
             step([$class: 'LogParserPublisher', failBuildOnError: true, unstableOnWarning: true, showGraphs: true,
