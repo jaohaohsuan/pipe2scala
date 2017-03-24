@@ -30,7 +30,7 @@ podTemplate(label: 'pipe2scala', containers: [
                 dir('target/docker') {
                     container('docker') {
                         def mainClass = sh(returnStdout: true, script: 'cat mainClass').trim()
-                        imageSha = sh(returnStdout: true, script: 'docker build --pull --build-arg mainClass=${mainClass} -q .').trim()[7..-1]
+                        imageSha = sh(returnStdout: true, script: "docker build --pull --build-arg mainClass=${mainClass} -q .").trim()[7..-1]
                     }
                 }
             }
