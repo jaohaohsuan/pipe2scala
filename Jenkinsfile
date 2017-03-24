@@ -25,12 +25,21 @@ podTemplate(label: 'pipe2scala', containers: [
                     sh 'sbt cpJarsForDocker'
                 }
             }
-            stage('build image'){
+            def imageSha
+            stage('build image') {
                 dir('target/docker') {
                     container('docker') {
                         def mainClass = sh(returnStdout: true, script: 'cat mainClass').trim()
-                        sh "docker build --build-arg mainClass=${mainClass} -t henryrao/pipe2scala ."
+                        imageSha = sh(returnStdout: true, script: 'docker build --pull --build-arg mainClass=${mainClass} -q .').trim()[7..-1]
                     }
+                }
+            }
+            stage('test') {
+                container('docker') {
+                    def containerId = sh(returnStdout: true, script: "docker run -d ${imageSha}")
+                    sleep 10
+                    sh "docker logs ${containerId}"
+                    sh "docker rm -f -v ${imageSha}"
                 }
             }
             step([$class: 'LogParserPublisher', failBuildOnError: true, unstableOnWarning: true, showGraphs: true,
