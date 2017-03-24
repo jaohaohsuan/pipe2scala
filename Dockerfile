@@ -11,5 +11,3 @@ ADD libs /app/libs
 ADD app /app
 
 ENTRYPOINT java -cp /app/libs/*:/app/* ${mainClass}
-
-

@@ -13,8 +13,6 @@ lazy val root = (project in file(".")).settings(
   ),
   cpJarsForDocker := {
 
-    clean.value
-
     val dockerDir = (target in Compile).value / "docker"
 
     val jar = (packageBin in Compile).value
