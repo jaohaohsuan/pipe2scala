@@ -1,22 +1,9 @@
 #!groovy
 podTemplate(label: 'pipe2scala', containers: [
-        containerTemplate(name: 'jnlp',
-                image: 'henryrao/jnlp-slave',
-                args: '${computer.jnlpmac} ${computer.name}',
-                alwaysPullImage: true),
-        containerTemplate(name: 'kubectl',
-                image: 'henryrao/kubectl:1.5.2',
-                ttyEnabled: true,
-                command: 'cat'),
-        containerTemplate(name: 'sbt',
-                image: 'henryrao/sbt:211',
-                ttyEnabled: true,
-                command: 'cat',
-                alwaysPullImage: true),
-        containerTemplate(name: 'docker',
-                image: 'docker:1.12.6',
-                ttyEnabled: true,
-                command: 'cat')
+        containerTemplate(name: 'jnlp', image: 'henryrao/jnlp-slave', args: '${computer.jnlpmac} ${computer.name}', alwaysPullImage: true),
+        containerTemplate(name: 'kubectl', image: 'henryrao/kubectl:1.5.2', ttyEnabled: true, command: 'cat'),
+        containerTemplate(name: 'sbt', image: 'henryrao/sbt:211', ttyEnabled: true, command: 'cat', alwaysPullImage: true),
+        containerTemplate(name: 'docker', image: 'docker:1.12.6', ttyEnabled: true, command: 'cat')
 ],
         volumes: [
                 hostPathVolume(mountPath: '/root/.kube/config', hostPath: '/root/.kube/config'),
@@ -37,6 +24,8 @@ podTemplate(label: 'pipe2scala', containers: [
                     container('docker') {
                         sh 'pwd'
                         sh 'ls -al'
+                        def mainClass = sh(returnStdout: true, script: 'cat main').trim()
+                        echo '${mainClass}'
                     }
                 }
             }
