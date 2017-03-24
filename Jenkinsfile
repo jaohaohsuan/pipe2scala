@@ -17,6 +17,11 @@ podTemplate(label: 'pipe2scala', containers: [
             checkout scm
             stage('compile') {
                 container('sbt') {
+                    sh 'sbt compile'
+                }
+            }
+            stage('stage') {
+                container('sbt') {
                     sh 'sbt cpJarsForDocker'
                 }
             }
