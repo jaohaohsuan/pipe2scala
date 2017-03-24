@@ -22,10 +22,9 @@ podTemplate(label: 'pipe2scala', containers: [
             stage('build image'){
                 dir('target/docker') {
                     container('docker') {
-                        sh 'pwd'
-                        sh 'ls -al'
+
                         def mainClass = sh(returnStdout: true, script: 'cat main').trim()
-                        echo '${mainClass}'
+                        echo "${mainClass}"
                     }
                 }
             }
