@@ -14,4 +14,4 @@ info /info/
 # also creates a quick access link.
 start /BUILD/
 
-sh /\+/
+info /\+/
