@@ -40,7 +40,7 @@ podTemplate(label: 'pipe2scala', containers: [
                     }
                 }
             }
-            step([$class: 'LogParserPublisher', failBuildOnError: true, unstableOnWarning: true,
+            step([$class: 'LogParserPublisher', failBuildOnError: true, unstableOnWarning: true, showGraphs: true,
                   projectRulePath: 'jenkins-rule-logparser', useProjectRule: true])
         }
 

@@ -9,9 +9,8 @@ warning /WARNING/
 
 # create a quick access link to lines in the report containing 'info'
 info /info/
+info /\+/
 
 # each line containing 'BUILD' represents the start of a section for grouping errors and warnings found after the line.
 # also creates a quick access link.
 start /BUILD/
-
-info /\+/
