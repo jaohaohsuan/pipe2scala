@@ -22,8 +22,8 @@ podTemplate(label: 'pipe2scala', containers: [
             stage('build image'){
                 dir('target/docker') {
                     container('docker') {
-                        def mainClass = sh(returnStdout: true, script: 'cat main').trim()
-                        echo "${mainClass}"
+                        def mainClass = sh(returnStdout: true, script: 'cat mainClass').trim()
+                        sh "docker build --build-arg mainClass=${mainClass} -t henryrao/pipe2scala ."
                     }
                 }
             }

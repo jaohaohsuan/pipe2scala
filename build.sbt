@@ -22,7 +22,7 @@ lazy val root = (project in file(".")).settings(
 
     (dependencyClasspath in Compile).value.files.foreach { f => IO.copyFile(f, dockerDir / "libs" / f.name )}
 
-    (mainClass in Compile).value.foreach { content => IO.write( dockerDir / "main", content ) }
+    (mainClass in Compile).value.foreach { content => IO.write( dockerDir / "mainClass", content ) }
 
     IO.copyFile(baseDirectory.value / "Dockerfile", dockerDir / "Dockerfile")
   }
