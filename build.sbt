@@ -1,7 +1,7 @@
 
 lazy val cpJarsForDocker = taskKey[Unit]("prepare for building Docker image")
 
-val akkaV = "2.4.17"
+val akkaV = "2.5.1"
 
 lazy val root = (project in file(".")).settings(
   name := "pipe2scala",
@@ -10,8 +10,10 @@ lazy val root = (project in file(".")).settings(
   exportJars := true,
   libraryDependencies  ++= Seq(
       "com.typesafe.akka" %% "akka-cluster" % akkaV,
+    "com.typesafe.akka" %% "akka-cluster-tools" % akkaV,
       "com.typesafe.akka" %% "akka-actor" % akkaV,
       "com.typesafe.akka" %% "akka-slf4j" % akkaV,
+    "com.typesafe.akka" %% "akka-cluster-metrics" % akkaV,
       "ch.qos.logback" % "logback-classic" % "1.1.3"
   ),
   cpJarsForDocker := {
@@ -28,4 +30,6 @@ lazy val root = (project in file(".")).settings(
     IO.copyFile(baseDirectory.value / "Dockerfile", dockerDir / "Dockerfile")
   }
 )
+
+fork in run in Global := true
         
