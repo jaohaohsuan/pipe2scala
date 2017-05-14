@@ -13,7 +13,7 @@ class SingletonGuardian extends Actor with ActorLogging {
   override def supervisorStrategy: SupervisorStrategy = OneForOneStrategy(maxNrOfRetries = 10, withinTimeRange = 1 minute) {
     case _: ActorInitializationException =>
       log.warning("ActorInitializationException")
-      Restart
+      Stop
     case _: Exception =>
       log.warning("Unexpected Exception")
       Escalate
