@@ -9,7 +9,10 @@ lazy val root = (project in file(".")).settings(
   scalaVersion := "2.11.8",
   exportJars := true,
   libraryDependencies  ++= Seq(
-      "com.typesafe.akka" %% "akka-actor" % akkaV
+      "com.typesafe.akka" %% "akka-cluster" % akkaV,
+      "com.typesafe.akka" %% "akka-actor" % akkaV,
+      "com.typesafe.akka" %% "akka-slf4j" % akkaV,
+      "ch.qos.logback" % "logback-classic" % "1.1.3"
   ),
   cpJarsForDocker := {
 
